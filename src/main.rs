@@ -1,4 +1,4 @@
-/* 
+/*
 A Polars EDA tool for .csv and .json datafiles
 */
 
@@ -23,14 +23,13 @@ enum Commands {
         #[clap(long)]
         path: String,
         #[clap(long)]
-        headers: bool
+        headers: bool,
     },
     Json {
         #[clap(long)]
-        path: String
-    }
+        path: String,
+    },
 }
-
 
 fn main() {
     let args = Cli::parse();
@@ -38,7 +37,7 @@ fn main() {
         Some(Commands::Csv { path, headers }) => {
             println!("Loading CSV to dataframe...");
             rusty_ds::read_csv(&path, headers)
-        },
+        }
         Some(Commands::Json { path }) => {
             println!("Loading JSON to dataframe...");
             rusty_ds::read_json(&path)
@@ -50,6 +49,6 @@ fn main() {
     };
     match df {
         Ok(df) => rusty_ds::df_summary(df),
-        Err(e) => println!("Error: {:?}", e)
+        Err(e) => println!("Error: {:?}", e),
     }
 }

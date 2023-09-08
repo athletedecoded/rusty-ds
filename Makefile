@@ -30,7 +30,7 @@ release:
 	cargo build --release
 
 image:
-	docker build -t rust-distro-cicd .
+	docker build -t rusty-ds .
 
 rundocker:
-	docker run -p 8080:8080 rust-distro-cicd
+	docker run -p 8080:8080 rusty-ds
