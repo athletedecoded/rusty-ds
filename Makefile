@@ -8,7 +8,11 @@ toolchain:
 
 install:
 	cargo clean &&\
-		cargo build -j 1
+	cargo build -j
+
+evcxr:
+	cargo install --locked evcxr_jupyter &&\
+	evcxr_jupyter --install
 
 format:
 	cargo fmt --quiet

@@ -1,11 +1,22 @@
-# Rust Distroless CI/CD Template
+# CI/CD Data Science with Rust
 
-[![CI/CD Pipeline](https://github.com/athletedecoded/rust-distro-cicd/actions/workflows/CICD.yml/badge.svg)](https://github.com/athletedecoded/rust-distro-cicd/actions/workflows/CICD.yml)
+[![CI/CD Pipeline](https://github.com/athletedecoded/rusty-ds/actions/workflows/CICD.yml/badge.svg)](https://github.com/athletedecoded/rusty-ds/actions/workflows/CICD.yml)
 
-Template for containerized Rust projects with automated CI/CD pipeline using Github Actions
+## Setup
 
-On Push/PR:
-* Format/lint/test code
-* Lint Dockerfile # currently set to log errors without failing to allow for cc/distroless:latest
-* Build and deploy distroless container to GHCR
+```
+# Install Rust
+make install
+
+# Install evcxr_jupyter
+make evcxr
+
+# Check versions
+make toolchain
+```
+
+## Run Notebook
+
+1. Launch `./notebook.ipynb` >> Select Kernel >> Jupyter Kernel >> Rust
+2. Run All Cells
 

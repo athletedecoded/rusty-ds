@@ -29,7 +29,8 @@
 				"ms-azuretools.vscode-docker",
 				"technosophos.vscode-make",
 				"ms-vscode.makefile-tools",
-				"GitHub.copilot"
+				"GitHub.copilot",
+				"ms-toolsai.jupyter"
 			]
 		}
 	}
