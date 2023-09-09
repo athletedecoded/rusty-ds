@@ -17,6 +17,9 @@ jobs:
           profile: minimal
           components: clippy, rustfmt
           override: true
+          
+    - name: Install Rust toolchain
+      run: make install
 
     - name: Check Rust toolchain
       run: make toolchain

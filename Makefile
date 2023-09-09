@@ -8,7 +8,7 @@ toolchain:
 
 install:
 	cargo clean &&\
-	cargo build -j
+	cargo build -j 1
 
 evcxr:
 	cargo install --locked evcxr_jupyter &&\
