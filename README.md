@@ -58,5 +58,5 @@ On git push/pull request the CI/CD flow is triggered using Github Actions:
 4. Build binary release
 5. Lint Dockerfile
 6. Build distroless rusty-ds image
-7. Push image to Github Container Registry
+7. Push image to [Github Container Registry](https://github.com/athletedecoded?tab=packages)
 
