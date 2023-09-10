@@ -60,3 +60,6 @@ On git push/pull request the CI/CD flow is triggered using Github Actions:
 6. Build distroless rusty-ds image
 7. Push image to [Github Container Registry](https://github.com/athletedecoded?tab=packages)
 
+## Resources
+* [EvCxR docs](https://github.com/evcxr/evcxr/tree/main/evcxr_jupyter)
+* [EvCxR Jupyter Demo](https://github.com/evcxr/evcxr/blob/main/evcxr_jupyter/samples/evcxr_jupyter_tour.ipynb) 
