@@ -2,8 +2,20 @@ use polars::prelude::*;
 use std::fs;
 use std::io::Cursor;
 
+// load a file from path and determine if csv/json
+pub fn load_file(path: &str, headers: bool) -> Result<DataFrame, PolarsError> {
+    println!("Loading file...");
+    let file_type = path.split('.').last().unwrap();
+    match file_type {
+        "csv" => read_csv(path, headers),
+        "json" => read_json(path),
+        _ => panic!("File type not supported"),
+    }
+}
+
 //read in a csv file
-pub fn read_csv(path: &str, headers: bool) -> Result<DataFrame, PolarsError> {
+fn read_csv(path: &str, headers: bool) -> Result<DataFrame, PolarsError> {
+    println!(".csv detected...");
     let df = CsvReader::from_path(path)
         .unwrap()
         .has_header(headers)
@@ -13,7 +25,8 @@ pub fn read_csv(path: &str, headers: bool) -> Result<DataFrame, PolarsError> {
 }
 
 //read in a json file
-pub fn read_json(path: &str) -> Result<DataFrame, PolarsError> {
+fn read_json(path: &str) -> Result<DataFrame, PolarsError> {
+    println!(".json detected...");
     // Read json file to string
     let json_str = fs::read_to_string(path).expect("Unable to read JSON");
     let df = JsonReader::new(Cursor::new(json_str)).finish().unwrap();

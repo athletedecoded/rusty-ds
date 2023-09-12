@@ -3,5 +3,5 @@
 FROM mcr.microsoft.com/devcontainers/rust:0-1-bullseye
 
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-   && apt-get -y install jupyter-notebook clang lld \
+   && apt-get -y install jupyter-notebook clang lld pkg-config libfreetype6-dev libfontconfig1-dev\
    && apt-get autoremove -y && apt-get clean -y

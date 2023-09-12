@@ -21,20 +21,20 @@ make toolchain
 2. Run All Cells
 
 
-## Rust EDA Tool 
+## Rust CLI EDA Tool (.csv, .json files supported)
 
-**For CSV files**
+**Summary**
 ```
-# If csv file includes headers
-cargo run csv --path /path/to/data.csv --headers
+# If file includes headers
+cargo run summary --path </path/to/data> --headers
 
-# If csv doesn't have headers
+# If file doesn't have headers
 cargo run csv --path /path/to/data.csv
 ```
 
-**For JSON files**
+**Plot** -- WIP
 ```
-cargo run json --path /path/to/data.csv
+cargo run plot --path </path/to/data> --headers --x <col_name> --y <col_name>
 ```
 
 ## Files
@@ -63,3 +63,4 @@ On git push/pull request the CI/CD flow is triggered using Github Actions:
 ## Resources
 * [EvCxR docs](https://github.com/evcxr/evcxr/tree/main/evcxr_jupyter)
 * [EvCxR Jupyter Demo](https://github.com/evcxr/evcxr/blob/main/evcxr_jupyter/samples/evcxr_jupyter_tour.ipynb) 
+* [Plotters x evcxr](https://github.com/plotters-rs/plotters#trying-with-jupyter-evcxr-kernel-interactively)

@@ -10,7 +10,7 @@ use clap::Parser;
     version = "1.0",
     author = "Kahlia Hogg",
     about = "A CLI tool for EDA using Polars",
-    after_help = "Example: cargo run csv --path <path/to/data.csv> --has_headers"
+    after_help = "Example: cargo run plot --path <path/to/data> --headers <true/false> --x <column_name> --y <column_name>"
 )]
 struct Cli {
     #[clap(subcommand)]
@@ -19,36 +19,49 @@ struct Cli {
 
 #[derive(Parser)]
 enum Commands {
-    Csv {
+    Summary {
         #[clap(long)]
         path: String,
         #[clap(long)]
         headers: bool,
     },
-    Json {
-        #[clap(long)]
-        path: String,
-    },
+    // Plot {
+    //     #[clap(long)]
+    //     path: String,
+    //     #[clap(long)]
+    //     headers: bool,
+    //     #[clap(long)]
+    //     x: String,
+    //     #[clap(long)]
+    //     y: String,
+    // },
 }
 
 fn main() {
     let args = Cli::parse();
-    let df = match args.command {
-        Some(Commands::Csv { path, headers }) => {
-            println!("Loading CSV to dataframe...");
-            rusty_ds::read_csv(&path, headers)
+    match args.command {
+        Some(Commands::Summary { path, headers }) => {
+            let df = rusty_ds::load_file(&path, headers);
+            match df {
+                Ok(df) => rusty_ds::df_summary(df),
+                Err(e) => println!("Error: {}", e),
+            }
         }
-        Some(Commands::Json { path }) => {
-            println!("Loading JSON to dataframe...");
-            rusty_ds::read_json(&path)
-        }
+        // Some(Commands::Plot {
+        //     path,
+        //     headers,
+        //     x,
+        //     y,
+        // }) => {
+        //     let df = rusty_ds::load_file(&path, headers);
+        //     match df {
+        //         Ok(df) => rusty_ds::plot(df, &x, &y),
+        //         Err(e) => println!("Error: {}", e),
+        //     }
+        // }
         None => {
             println!("No command specified");
             return;
         }
     };
-    match df {
-        Ok(df) => rusty_ds::df_summary(df),
-        Err(e) => println!("Error: {:?}", e),
-    }
 }
