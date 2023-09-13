@@ -29,7 +29,7 @@ make toolchain
 cargo run summary --path </path/to/data> --headers
 
 # If file doesn't have headers
-cargo run csv --path /path/to/data.csv
+cargo run summary --path </path/to/data>
 ```
 
 **Plot** -- WIP
