@@ -25,16 +25,16 @@ enum Commands {
         #[clap(long)]
         headers: bool,
     },
-    // Plot {
-    //     #[clap(long)]
-    //     path: String,
-    //     #[clap(long)]
-    //     headers: bool,
-    //     #[clap(long)]
-    //     x: String,
-    //     #[clap(long)]
-    //     y: String,
-    // },
+    Plot {
+        #[clap(long)]
+        path: String,
+        #[clap(long)]
+        headers: bool,
+        #[clap(long)]
+        x: String,
+        #[clap(long)]
+        y: String,
+    },
 }
 
 fn main() {
@@ -47,21 +47,20 @@ fn main() {
                 Err(e) => println!("Error: {}", e),
             }
         }
-        // Some(Commands::Plot {
-        //     path,
-        //     headers,
-        //     x,
-        //     y,
-        // }) => {
-        //     let df = rusty_ds::load_file(&path, headers);
-        //     match df {
-        //         Ok(df) => rusty_ds::plot(df, &x, &y),
-        //         Err(e) => println!("Error: {}", e),
-        //     }
-        // }
+        Some(Commands::Plot {
+            path,
+            headers,
+            x,
+            y,
+        }) => {
+            let df = rusty_ds::load_file(&path, headers);
+            match df {
+                Ok(df) => rusty_ds::plot_data(&df, &x, &y),
+                Err(e) => println!("Error: {}", e),
+            }
+        }
         None => {
             println!("No command specified");
-            return;
         }
     };
 }

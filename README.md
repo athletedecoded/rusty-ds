@@ -27,14 +27,24 @@ make toolchain
 ```
 # If file includes headers
 cargo run summary --path </path/to/data> --headers
+# ex. cargo run plot --path ./data/sample.csv --headers
 
 # If file doesn't have headers
 cargo run summary --path </path/to/data>
+# ex. cargo run plot --path ./data/sample.json
 ```
 
-**Plot** -- WIP
+**Plot**
 ```
-cargo run plot --path </path/to/data> --headers --x <col_name> --y <col_name>
+cargo run plot --path </path/to/data> <--headers> --x <col_name> --y <col_name>
+# ex. cargo run plot --path ./data/sample.csv --headers --x fats_g --y calories
+# ex. cargo run plot --path ./data/sample.json --x fats_g --y calories
+```
+
+## Unit Tests
+
+```
+make test
 ```
 
 ## Files
@@ -60,7 +70,12 @@ On git push/pull request the CI/CD flow is triggered using Github Actions:
 6. Build distroless rusty-ds image
 7. Push image to [Github Container Registry](https://github.com/athletedecoded?tab=packages)
 
+## ToDos
+- [] Add error handling for column names not in df
+- [] Add dynamic plot bounds
+
 ## Resources
 * [EvCxR docs](https://github.com/evcxr/evcxr/tree/main/evcxr_jupyter)
 * [EvCxR Jupyter Demo](https://github.com/evcxr/evcxr/blob/main/evcxr_jupyter/samples/evcxr_jupyter_tour.ipynb) 
 * [Plotters x evcxr](https://github.com/plotters-rs/plotters#trying-with-jupyter-evcxr-kernel-interactively)
+* [Plotters Dev Guide](https://plotters-rs.github.io/book/intro/introduction.html)

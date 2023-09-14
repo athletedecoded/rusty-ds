@@ -1,3 +1,4 @@
+use plotters::prelude::*;
 use polars::prelude::*;
 use std::fs;
 use std::io::Cursor;
@@ -41,21 +42,59 @@ pub fn df_summary(df: DataFrame) {
     println!("{:?}", df.describe(None));
 }
 
+pub fn plot_data(
+    df: &DataFrame,
+    x_col: &str,
+    y_col: &str,
+) {
+    // get x and y columns --> transform to f64 Vec
+    let x = df.column(x_col).unwrap().cast(&DataType::Float64).unwrap();
+    let x_vec: Vec<f64> = x.f64().unwrap().into_no_null_iter().collect();
+    let y = df.column(y_col).unwrap().cast(&DataType::Float64).unwrap();
+    let y_vec: Vec<f64> = y.f64().unwrap().into_no_null_iter().collect();
+    // Create (x,y) pairs
+    let data: Vec<(f64, f64)> = x_vec.iter().zip(y_vec).map(|(x, y)| (*x, y)).collect();
+    // Build plot
+    let root = BitMapBackend::new("plots/scatter.png", (640, 480)).into_drawing_area();
+    root.fill(&WHITE).unwrap();
+    let mut ctx = ChartBuilder::on(&root)
+        .set_label_area_size(LabelAreaPosition::Left, 40)
+        .set_label_area_size(LabelAreaPosition::Bottom, 40)
+        .caption("EvCxR Plot Demo", ("sans-serif", 40))
+        .build_cartesian_2d(0f64..250f64, 0f64..250f64)
+        .unwrap();
+
+    ctx.configure_mesh().draw().unwrap();
+
+    ctx.draw_series(data.iter().map(|point| Circle::new(*point, 5, &RED)))
+        .unwrap();
+
+    root.present().unwrap();
+    println!("Plot saved to plots/scatter.png");
+
+}
+
 // CI/CD test
 #[cfg(test)]
 mod tests {
-    use crate::{read_csv, read_json};
-
+    use crate::{load_file, plot_data};
     #[test]
-    fn test_csv_reader() {
+    fn load_csv() {
         let path = "./data/sample.csv";
-        let df = read_csv(&path, true);
+        let df = load_file(&path, true);
         assert!(df.is_ok());
     }
     #[test]
-    fn test_json_reader() {
+    fn load_json() {
         let path = "./data/sample.json";
-        let df = read_json(&path);
+        let df = load_file(&path, false);
         assert!(df.is_ok());
+    }
+
+    #[test]
+    fn test_plot() {
+        let path = "./data/sample.csv";
+        let df = load_file(&path, true).unwrap();
+        plot_data(&df, "fats_g", "calories");
     }
 }
