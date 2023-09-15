@@ -1,5 +1,7 @@
 # CI/CD Data Science with Rust
 
+CLI and Notebook EDA using polars/plotters/evcxr + CI/CD Distroless Deployment
+
 [![CI/CD Pipeline](https://github.com/athletedecoded/rusty-ds/actions/workflows/CICD.yml/badge.svg)](https://github.com/athletedecoded/rusty-ds/actions/workflows/CICD.yml)
 
 ## Setup
@@ -21,17 +23,19 @@ make toolchain
 2. Run All Cells
 
 
-## Rust CLI EDA Tool (.csv, .json files supported)
+## CLI EDA Tool
+
+*Supported data formats: .csv, .json files*
 
 **Summary**
 ```
 # If file includes headers
 cargo run summary --path </path/to/data> --headers
-# ex. cargo run plot --path ./data/sample.csv --headers
+# ex. cargo run summary --path ./data/sample.csv --headers
 
 # If file doesn't have headers
 cargo run summary --path </path/to/data>
-# ex. cargo run plot --path ./data/sample.json
+# ex. cargo run summary --path ./data/sample.json
 ```
 
 **Plot**
@@ -71,8 +75,8 @@ On git push/pull request the CI/CD flow is triggered using Github Actions:
 7. Push image to [Github Container Registry](https://github.com/athletedecoded?tab=packages)
 
 ## ToDos
-- [] Add error handling for column names not in df
-- [] Add dynamic plot bounds
+- [ ] Add error handling for column name DNE
+- [x] Add dynamic plot bounds
 
 ## Resources
 * [EvCxR docs](https://github.com/evcxr/evcxr/tree/main/evcxr_jupyter)

@@ -42,11 +42,7 @@ pub fn df_summary(df: DataFrame) {
     println!("{:?}", df.describe(None));
 }
 
-pub fn plot_data(
-    df: &DataFrame,
-    x_col: &str,
-    y_col: &str,
-) {
+pub fn zip_data(df: &DataFrame, x_col: &str, y_col: &str) -> Vec<(f64, f64)> {
     // get x and y columns --> transform to f64 Vec
     let x = df.column(x_col).unwrap().cast(&DataType::Float64).unwrap();
     let x_vec: Vec<f64> = x.f64().unwrap().into_no_null_iter().collect();
@@ -54,6 +50,22 @@ pub fn plot_data(
     let y_vec: Vec<f64> = y.f64().unwrap().into_no_null_iter().collect();
     // Create (x,y) pairs
     let data: Vec<(f64, f64)> = x_vec.iter().zip(y_vec).map(|(x, y)| (*x, y)).collect();
+    data
+}
+
+pub fn get_lims(df: &DataFrame, col: &str) -> (f64, f64) {
+    let col = df.column(col).unwrap().cast(&DataType::Float64).unwrap();
+    let col_vec: Vec<f64> = col.f64().unwrap().into_no_null_iter().collect();
+    let min = col_vec.iter().min_by(|x, y| x.partial_cmp(y).unwrap()).unwrap();
+    let max = col_vec.iter().max_by(|x, y| x.partial_cmp(y).unwrap()).unwrap();
+    (*min, *max)
+}
+
+pub fn plot_data(data: Vec<(f64, f64)>, xlims: (f64, f64), ylims: (f64, f64)) {
+    let xmin = xlims.0 + 1f64;
+    let xmax = xlims.1 + 1f64;
+    let ymin = ylims.0 + 1f64;
+    let ymax = ylims.1 + 1f64;
     // Build plot
     let root = BitMapBackend::new("plots/scatter.png", (640, 480)).into_drawing_area();
     root.fill(&WHITE).unwrap();
@@ -61,7 +73,7 @@ pub fn plot_data(
         .set_label_area_size(LabelAreaPosition::Left, 40)
         .set_label_area_size(LabelAreaPosition::Bottom, 40)
         .caption("EvCxR Plot Demo", ("sans-serif", 40))
-        .build_cartesian_2d(0f64..250f64, 0f64..250f64)
+        .build_cartesian_2d(xmin..xmax, ymin..ymax)
         .unwrap();
 
     ctx.configure_mesh().draw().unwrap();
@@ -77,7 +89,7 @@ pub fn plot_data(
 // CI/CD test
 #[cfg(test)]
 mod tests {
-    use crate::{load_file, plot_data};
+    use crate::{load_file, zip_data, get_lims, plot_data};
     #[test]
     fn load_csv() {
         let path = "./data/sample.csv";
@@ -94,7 +106,14 @@ mod tests {
     #[test]
     fn test_plot() {
         let path = "./data/sample.csv";
-        let df = load_file(&path, true).unwrap();
-        plot_data(&df, "fats_g", "calories");
+        // load df
+        let df = load_file(path, true).unwrap();
+        // get data
+        let data = zip_data(&df, "calories", "fats_g");
+        // get x and y limits
+        let xlims = get_lims(&df, "calories");
+        let ylims = get_lims(&df, "fats_g");
+        // plot data
+        plot_data(data, xlims, ylims);
     }
 }

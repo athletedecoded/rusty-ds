@@ -55,7 +55,15 @@ fn main() {
         }) => {
             let df = rusty_ds::load_file(&path, headers);
             match df {
-                Ok(df) => rusty_ds::plot_data(&df, &x, &y),
+                Ok(df) => {
+                    // get data
+                    let data = rusty_ds::zip_data(&df, &x,&y);
+                    // get x and y limits
+                    let xlims = rusty_ds::get_lims(&df, &x);
+                    let ylims = rusty_ds::get_lims(&df, &y);
+                    // plot data
+                    rusty_ds::plot_data(data, xlims, ylims);
+                },
                 Err(e) => println!("Error: {}", e),
             }
         }
