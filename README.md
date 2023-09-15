@@ -1,8 +1,11 @@
 # CI/CD Data Science with Rust
 
-CLI and Notebook EDA using polars/plotters/evcxr + CI/CD Distroless Deployment
+CLI and Notebook EDA using polars/plotters/evcxr + CI/CD distroless deployment
 
 [![CI/CD Pipeline](https://github.com/athletedecoded/rusty-ds/actions/workflows/CICD.yml/badge.svg)](https://github.com/athletedecoded/rusty-ds/actions/workflows/CICD.yml)
+
+**[DEMO](https://youtu.be/ZJXYvAEZFbM)**
+
 
 ## Setup
 
@@ -73,6 +76,7 @@ On git push/pull request the CI/CD flow is triggered using Github Actions:
 5. Lint Dockerfile
 6. Build distroless rusty-ds image
 7. Push image to [Github Container Registry](https://github.com/athletedecoded?tab=packages)
+
 
 ## ToDos
 - [ ] Add error handling for column name DNE
