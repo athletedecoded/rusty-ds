@@ -66,3 +66,12 @@ jobs:
       #     push: true
       #     tags: ghcr.io/${{ env.REPO }}:${{ github.sha }}
       #     file: ./Dockerfile
+
+      - name: Build status badge
+        uses: RubbaBoy/BYOB@v1.3.0
+        with:
+          NAME: ${{ matrix.release }}
+          LABEL: ${{ matrix.release }}
+          STATUS: ${{ job.status }}
+          COLOR: ${{ job.status == 'success' && 'green' || job.status == 'failure' && 'red' || 'yellow' }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

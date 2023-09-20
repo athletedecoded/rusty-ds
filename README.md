@@ -1,10 +1,14 @@
 # CI/CD Data Science with Rust
 
+[![CI/CD Pipeline](https://github.com/athletedecoded/rusty-ds/actions/workflows/CICD.yml/badge.svg)](https://github.com/athletedecoded/rusty-ds/actions/workflows/CICD.yml)
+
 CLI and Notebook EDA using polars/plotters/evcxr + CI/CD distroless deployment
 
 "Futureproofs" by testing build across rust releases: stable, beta, nightly
 
-[![CI/CD Pipeline](https://github.com/athletedecoded/rusty-ds/actions/workflows/CICD.yml/badge.svg)](https://github.com/athletedecoded/rusty-ds/actions/workflows/CICD.yml)
+![Stable](https://byob.yarr.is/athletedecoded/rusty-ds/stable)
+![Beta](https://byob.yarr.is/athletedecoded/rusty-ds/beta)
+![Nightly](https://byob.yarr.is/athletedecoded/rusty-ds/nightly)
 
 **[DEMO](https://youtu.be/ZJXYvAEZFbM)**
 
