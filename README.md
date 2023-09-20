@@ -2,6 +2,8 @@
 
 CLI and Notebook EDA using polars/plotters/evcxr + CI/CD distroless deployment
 
+"Futureproofs" by testing build across rust releases: stable, beta, nightly
+
 [![CI/CD Pipeline](https://github.com/athletedecoded/rusty-ds/actions/workflows/CICD.yml/badge.svg)](https://github.com/athletedecoded/rusty-ds/actions/workflows/CICD.yml)
 
 **[DEMO](https://youtu.be/ZJXYvAEZFbM)**
@@ -69,13 +71,15 @@ make test
 
 On git push/pull request the CI/CD flow is triggered using Github Actions:
 
-1. Install and validate Rust toolchain
+1. Install and validate Rust toolchain for each of stable/beta/nightly release
 2. Format and lint code
 3. Run unit tests
 4. Build binary release
 5. Lint Dockerfile
 6. Build distroless rusty-ds image
 7. Push image to [Github Container Registry](https://github.com/athletedecoded?tab=packages)
+
+NB: To build and push to GHCR, uncomment section in `.github/workflows/CICD.yml`
 
 
 ## ToDos
