@@ -2,13 +2,13 @@
 
 [![CI/CD Pipeline](https://github.com/athletedecoded/rusty-ds/actions/workflows/CICD.yml/badge.svg)](https://github.com/athletedecoded/rusty-ds/actions/workflows/CICD.yml)
 
-CLI and Notebook EDA using polars/plotters/evcxr + CI/CD distroless deployment
-
-"Futureproofs" by testing build across rust releases: stable, beta, nightly
-
 ![Stable](https://byob.yarr.is/athletedecoded/rusty-ds/stable)
 ![Beta](https://byob.yarr.is/athletedecoded/rusty-ds/beta)
 ![Nightly](https://byob.yarr.is/athletedecoded/rusty-ds/nightly)
+
+CLI and Notebook EDA using polars/plotters/evcxr + CI/CD distroless deployment
+
+"Futureproofs" by testing build across rust releases: stable, beta, nightly
 
 **[DEMO](https://youtu.be/ZJXYvAEZFbM)**
 
