@@ -48,6 +48,9 @@ cargo run summary --path </path/to/data>
 ```
 
 **Plot**
+
+![image](./plots/scatter.png)
+
 ```
 cargo run plot --path </path/to/data> <--headers> --x <col_name> --y <col_name>
 # ex. cargo run plot --path ./data/sample.csv --headers --x fats_g --y calories
